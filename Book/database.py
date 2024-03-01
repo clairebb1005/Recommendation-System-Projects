@@ -5,7 +5,7 @@ from sqlalchemy import Column, Integer, String
 import pandas as pd
 
 # Define the database URL
-SQLALCHEMY_DATABASE_URL = 'sqlite:///./books.db'
+SQLALCHEMY_DATABASE_URL = 'sqlite:///./books_test.db'
 
 # Create the SQLAlchemy engine to open up and use database
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
@@ -80,6 +80,14 @@ def create_session(db_path):
     SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
     session = SessionLocal()
     return session
+
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 
 if __name__ == '__main__':
