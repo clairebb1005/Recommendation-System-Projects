@@ -20,12 +20,25 @@ The dataset used for this project can be downloaded from [Kaggle](https://www.ka
 - `models_pd.py`: Contains pandas-based recommendation models.
 - `models_sql.py`: Contains SQL-based recommendation models.
 - `main.py`: Demonstrates how to use both SQL and pandas-based approaches for book recommendation.
-- `app.py`: Contains the FastAPI application for CRUD operations on books to manipulate the database
+- `app.py`: Contains the FastAPI application for CRUD operations on books to manipulate the database. Use `uvicorn app:app --reload` command under `Book` repository and go to `http://127.0.0.1:8000/docs#` to test it.
 
-## Dependencies
+## Installation
 
-- pandas
-- SQLAlchemy
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your_username/your_repository.git
+   ```
+   
+2. Navigate to the project directory:
+   ```bash
+   cd Recommendation-System-Projects
+   ```
+4. Install the project dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
 
 ## License
 
