@@ -20,6 +20,7 @@ The dataset used for this project can be downloaded from [Kaggle](https://www.ka
 - `models_pd.py`: Contains pandas-based recommendation models.
 - `models_sql.py`: Contains SQL-based recommendation models.
 - `main.py`: Demonstrates how to use both SQL and pandas-based approaches for book recommendation.
+- `app.py`: Contains the FastAPI application for CRUD operations on books to manipulate the database
 
 ## Dependencies
 
