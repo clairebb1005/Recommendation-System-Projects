@@ -1,27 +1,27 @@
-import pandas as pd
-import numpy as np
+from database import init_db, create_session
+from models_sql import recommend_popularity_based_sql
+from models_pd import recommend_popularity_based_pd
+from books import BookData
+import warnings
+warnings.filterwarnings('ignore')
 
-books = pd.read_csv('data/Books.csv')
-ratings = pd.read_csv('data/Ratings.csv')
-users = pd.read_csv('data/Users.csv')
+# SQL implementation
+database_exist = True
 
-# ISBN,Book-Title,Book-Author,Year-Of-Publication,Publisher,Image-URL-S,Image-URL-M,Image-URL-L
-print("====================================Books===================================")
-print(books.head())
+if not database_exist:
+    init_db()
 
-# User-ID,ISBN,Book-Rating
-print("====================================Ratings===================================")
-print(ratings.head())
+# Initialize the session
+db_path = 'sqlite:///books.db'
+session = create_session(db_path)
 
-# User-ID,Location,Age
-print("====================================Users===================================")
-print(users.head())
+# Call the recommend_popularity_based function
+popularity = recommend_popularity_based_sql(session)
 
-book_ratings = books.merge(ratings, on='ISBN')
-user_rating = users.merge(ratings, on='User-ID')
+# Print or return the popularity
+print(popularity)
 
-print("====================================Book Ratings===================================")
-print(book_ratings.head())
-print("====================================User Ratings===================================")
-print(user_rating.head())
-
+# Pandas Dataframe implementation
+book_data = BookData(ratings_file="data/Ratings.csv", books_file="data/Books.csv", users_file="data/Users.csv")
+popular_books = recommend_popularity_based_pd(book_data)
+print(popular_books)
