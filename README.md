@@ -3,7 +3,7 @@
 `Book` repository contains an implementation of a book recommendation system using both SQL and pandas-based approaches. The recommendation system is based on popularity, where books are recommended based on their average ratings and total number of ratings.
 
 ### Dataset
-The dataset used for this project can be downloaded from [Kaggle](https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset?resource=download). After downloading, extract the contents into a directory named `data` inside 'Book' repository.
+The dataset used for this project can be downloaded from [Kaggle](https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset?resource=download). After downloading, extract the contents into a directory named `data` inside `Book` repository.
 
 ## Models
 
