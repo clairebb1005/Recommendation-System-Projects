@@ -17,8 +17,6 @@ session = create_session(db_path)
 
 # Call the recommend_popularity_based function
 popularity = recommend_popularity_based_sql(session)
-
-# Print or return the popularity
 print(popularity)
 
 # Pandas Dataframe implementation
