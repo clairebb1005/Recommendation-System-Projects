@@ -2,6 +2,9 @@ from database import create_session, Book, get_db
 from fastapi import FastAPI, HTTPException, Depends, status
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
+from typing import List
+from models_pd import recommend_collaborative_filtering_test
+from books import BookData
 
 
 class BookBase(BaseModel):
@@ -23,12 +26,26 @@ class BookUpdate(BookBase):
     pass
 
 
+class RecommendationRequest(BaseModel):
+    user_id: int
+
+
+class RecommendationResponse(BaseModel):
+    book_id: str
+    estimated_rating: float
+
+
 # Initialize the session
 db_path = 'sqlite:///books.db'
 session = create_session(db_path)
 
 # Initialize FastAPI
 app = FastAPI()
+
+
+@app.get("/")
+async def read_root():
+    return {"message": "Welcome to the Book Recommendation API!"}
 
 
 # Show a existed book
@@ -74,3 +91,22 @@ async def delete_book(isbn: str, db: Session = Depends(get_db)):
     db.delete(existing_book)
     db.commit()
     return {"message": "Book deleted successfully"}
+
+
+# Recommend a book based on user's history
+@app.post("/recommendations/", response_model=List[RecommendationResponse], status_code=status.HTTP_200_OK)
+async def get_recommendations(request: RecommendationRequest):
+    user_id = request.user_id
+    book_data = BookData(ratings_file="data/Ratings.csv", books_file="data/Books.csv", users_file="data/Users.csv")
+
+    # Get recommendations for the user
+    recommendations = recommend_collaborative_filtering_test(book_data, 'knn', user_id, n=10)
+    if not recommendations:
+        raise HTTPException(status_code=404, detail="No recommendations found for the user")
+
+    # Format recommendations for response
+    response_recommendations = []
+    for book_id, estimated_rating in recommendations:
+        response_recommendations.append({"book_id": book_id, "estimated_rating": estimated_rating})
+
+    return response_recommendations
