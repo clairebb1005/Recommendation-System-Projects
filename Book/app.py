@@ -1,9 +1,10 @@
 from database import create_session, Book, get_db
 from fastapi import FastAPI, HTTPException, Depends, status
 from sqlalchemy.orm import Session
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import List
 from models_pd import recommend_collaborative_filtering_test
+from models_sql import recommend_popularity_based_sql
 from books import BookData
 
 
@@ -24,6 +25,11 @@ class BookCreate(BookBase):
 
 class BookUpdate(BookBase):
     pass
+
+
+class NPopularRequest(BaseModel):
+    n: int = Field(ge=1, lt=100)
+    min_rating: int = Field(ge=0, le=1000)
 
 
 class RecommendationRequest(BaseModel):
@@ -91,6 +97,20 @@ async def delete_book(isbn: str, db: Session = Depends(get_db)):
     db.delete(existing_book)
     db.commit()
     return {"message": "Book deleted successfully"}
+
+
+# Recommend top N popular books
+@app.post("/popularbooks/", status_code=status.HTTP_200_OK)
+async def get_popular(request: NPopularRequest, db: Session = Depends(get_db)):
+    popularity = recommend_popularity_based_sql(db, min_ratings=request.min_rating,
+                                                num_recommendations=request.n)
+    response_popularities = []
+    for book_id, average_rating, total_ratings in popularity:
+        response_popularities.append({"book_id": book_id,
+                                         "average_rating": average_rating,
+                                         "total_rating": total_ratings})
+
+    return response_popularities
 
 
 # Recommend a book based on user's history
