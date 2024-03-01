@@ -48,9 +48,15 @@ The dataset used for this project can be downloaded from [Kaggle](https://www.ka
    ```bash
    python main.py
    ```
-6. Access the FastAPI Swagger UI:
+5. Access the FastAPI Swagger UI:
 Use `uvicorn app:app --reload` command under `Book` repository.
 Open your web browser and go to http://127.0.0.1:8000/docs to test the FastAPI application for CRUD operations on books and to generate recommendations using collaborative filtering.
+6. Build Dockerfile: 
+   ```bash
+   docker build -t recommendation-app .
+   docker run -d -p 8000:8000 recommendation-app
+   ```
+   You can access http://localhost:8000/ after built.
 
 
 ## License
