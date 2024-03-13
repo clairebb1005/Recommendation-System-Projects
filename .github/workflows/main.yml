@@ -48,7 +48,7 @@ jobs:
     - name: Run Tests
       run: |
         pip install pytest
-        pytest  test_app.py
+        pytest  Book/test_app.py
   
   # deploy:
   #   name: Deploy to Production
