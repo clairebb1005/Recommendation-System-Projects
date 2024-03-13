@@ -58,6 +58,11 @@ Open your web browser and go to http://127.0.0.1:8000/docs to test the FastAPI a
    ```
    You can access http://localhost:8000/ after built.
 
+## CI/CD & Deployment
+After each commit, GitHub Actions automatically runs the building, testing, and deployment processes. Docker is used in the CI/CD pipeline to containerize the application. More details in `.github/workflows
+/main.yml`.
+
+
 
 ## License
 
