@@ -8,7 +8,7 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install any dependencies specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --use-pep517 -r requirements.txt
 
 # Copy the rest of the application code into the container at /app
 COPY Book/ .
