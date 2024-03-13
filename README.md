@@ -59,9 +59,13 @@ Open your web browser and go to http://127.0.0.1:8000/docs to test the FastAPI a
    You can access http://localhost:8000/ after built.
 
 ## CI/CD & Deployment
-After each commit, GitHub Actions automatically runs the building, testing, and deployment processes. Docker is used in the CI/CD pipeline to containerize the application. More details in `.github/workflows
-/main.yml`.
+After each commit, GitHub Actions automatically initiates the building, testing, and deployment processes. Docker plays a crucial role in our CI/CD pipeline by containerizing the application. For more details, refer to `.github/workflows/main.yml`. 
 
+To configure DockerHub integration, specify your `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN` in `Settings` -> `Secrets and Variables` -> `Actions`. 
+
+Once your Docker image is successfully built, navigate to DockerHub, open your image, select `Public View`, and copy the `Docker Pull Command`. 
+
+Then, execute the command in your terminal. Finally, run `docker run $ImageName$` to access your application via the provided link.
 
 
 ## License
