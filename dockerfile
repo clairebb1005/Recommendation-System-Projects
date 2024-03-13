@@ -11,7 +11,6 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install any dependencies specified in requirements.txt
-RUN yum install gcc -y
 RUN pip install --no-cache-dir -r requirements.txt  
 
 # Copy the rest of the application code into the container at /app
