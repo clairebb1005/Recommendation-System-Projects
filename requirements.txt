@@ -8,3 +8,4 @@ yarl==1.9.4
 asyncpg
 fastapi
 httpx
+surprise
