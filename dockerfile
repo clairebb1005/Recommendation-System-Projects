@@ -2,7 +2,7 @@
 FROM python:3.9-slim
 
 # Install dependencies specified in requirements.txt
-RUN apt-get update && apt-get install -y gcc
+RUN apt-get update && apt-get install -y gcc wget
 
 # Set the working directory in the container
 WORKDIR /app
@@ -17,7 +17,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN mkdir -p data
 
 # Download the dataset zip file from Kaggle
-RUN curl -o /tmp/dataset.zip "https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset/download?datasetVersionNumber=3"
+RUN wget -o /tmp/dataset.zip "https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset/download?datasetVersionNumber=3"
 
 # Extract the dataset zip file
 RUN unzip /tmp/dataset.zip -d /tmp/dataset
