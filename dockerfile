@@ -2,7 +2,7 @@
 FROM python:3.9-slim
 
 # Install dependencies specified in requirements.txt
-RUN apt-get update && apt-get install -y gcc wget
+RUN apt-get update && apt-get install -y gcc wget unzip
 
 # Set the working directory in the container
 WORKDIR /app
