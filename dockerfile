@@ -23,7 +23,7 @@ RUN wget -o /tmp/archive.zip "https://www.kaggle.com/datasets/arashnic/book-reco
 RUN ls -l /tmp
 
 # Extract the dataset zip file
-# RUN unzip /tmp/archive.zip -d /tmp/dataset
+RUN unzip /tmp/archive.zip -d /tmp/dataset
 
 # Copy the extracted files into the /app/Book/data directory
 # RUN cp /tmp/dataset/* data/
