@@ -2,7 +2,7 @@
 FROM python:3.9-slim
 
 # Install dependencies specified in requirements.txt
-RUN apt-get update && apt-get install -y gcc wget unzip
+RUN apt-get update && apt-get install -y gcc wget fastjar
 
 # Set the working directory in the container
 WORKDIR /app
@@ -23,7 +23,8 @@ RUN wget -o /tmp/archive.zip "https://www.kaggle.com/datasets/arashnic/book-reco
 RUN ls -l /tmp
 
 # Extract the dataset zip file
-RUN unzip /tmp/archive.zip -d /tmp/dataset
+# RUN unzip /tmp/archive.zip -d /tmp/dataset
+RUN jar xvf /tmp/archive.zip -C /tmp/data
 
 # Copy the extracted files into the /app/Book/data directory
 # RUN cp /tmp/dataset/* data/
