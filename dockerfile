@@ -26,14 +26,14 @@ RUN ls -l /tmp
 # RUN jar xvf /tmp/archive.zip -C /tmp/ && mv /tmp/* /app/data/ && rm -rf /tmp/*
 RUN jar xvf /tmp/archive.zip -C /data/ && rm /tmp/archive.zip
 
-# List the copied files for verification
-RUN ls -l data/
-
 # Copy the rest of the application code into the container at /app
 COPY Book/ .
 
 # List all files after copying for debugging purpose
 RUN ls -l
+
+# List the copied files for verification
+RUN ls -l data/
 
 # Expose port 8000 to the outside world
 EXPOSE 8000
