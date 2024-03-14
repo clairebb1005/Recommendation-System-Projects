@@ -2,7 +2,7 @@
 FROM python:3.9-slim
 
 # Install dependencies specified in requirements.txt
-RUN apt-get update && apt-get install -y gcc wget unzip
+RUN apt-get update && apt-get install -y gcc wget p7zip-full
 
 # Set the working directory in the container
 WORKDIR /app
@@ -24,7 +24,7 @@ RUN ls -l /tmp
 
 # Extract the dataset zip file using jar command and copy extracted files into /app/data directory
 # RUN jar xvf /tmp/archive.zip -C /tmp/ && mv /tmp/* /app/data/ && rm -rf /tmp/*
-RUN unzip /tmp/archive.zip /data/ && rm /tmp/archive.zip
+RUN 7z x /tmp/archive.zip /data/ && rm /tmp/archive.zip
 
 # Copy the rest of the application code into the container at /app
 COPY Book/ .
