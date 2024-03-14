@@ -22,11 +22,17 @@ RUN wget -o /tmp/archive.zip "https://www.kaggle.com/datasets/arashnic/book-reco
 # List out the files in /tmp along with their file types
 RUN ls -l /tmp
 
-# Extract the dataset zip file
-RUN jar xvf /tmp/archive.zip -C /tmp/dataset
+# Extract the dataset zip file using jar command
+RUN jar xvf /tmp/archive.zip -C /tmp/
 
-# Copy the extracted files into the /app/Book/data directory
+# List the extracted files for verification
+RUN ls -l /tmp
+
+# Copy the extracted files into the /app/data directory
 RUN cp /tmp/dataset/* data/
+
+# List the copied files for verification
+RUN ls -l data/
 
 # Copy the rest of the application code into the container at /app
 COPY Book/ .
