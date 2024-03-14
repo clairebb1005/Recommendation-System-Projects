@@ -13,6 +13,18 @@ COPY requirements.txt .
 # Install any dependencies specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt  
 
+# Create the data directory
+RUN mkdir -p data
+
+# Download the dataset zip file from Kaggle
+RUN wget -O /tmp/dataset.zip "https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset/download?datasetVersionNumber=3"
+
+# Extract the dataset zip file
+RUN unzip /tmp/dataset.zip -d /tmp/dataset
+
+# Copy the extracted files into the /app/Book/data directory
+RUN cp /tmp/dataset/* data/
+
 # Copy the rest of the application code into the container at /app
 COPY Book/ .
 
