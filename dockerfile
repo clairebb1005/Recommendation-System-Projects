@@ -11,7 +11,7 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install any dependencies specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt  
+# RUN pip install --no-cache-dir -r requirements.txt  
 
 # Create the data directory
 RUN mkdir -p data
@@ -22,24 +22,17 @@ RUN wget -o /tmp/archive.zip "https://www.kaggle.com/datasets/arashnic/book-reco
 # List out the files in /tmp along with their file types
 RUN ls -l /tmp
 
-# Extract the dataset zip file using jar command
-# RUN jar xvf /tmp/archive.zip -C /tmp/
-
-# List the extracted files for verification
-# RUN ls -l /tmp
-
-# Copy the extracted files into the /app/data directory
-# RUN cp /tmp/dataset/* data/
-
+# Extract the dataset zip file using jar command and copy extracted files into /app/data directory
 RUN jar xvf /tmp/archive.zip -C /tmp/ && mv /tmp/* /app/data/ && rm -rf /tmp/*
 
 # List the copied files for verification
-# RUN ls -l data/
+RUN ls -l data/
 
 # Copy the rest of the application code into the container at /app
 COPY Book/ .
 
-RUN ls - l app/
+# List all files after copying for debugging purpose
+RUN ls -l
 
 # Expose port 8000 to the outside world
 EXPOSE 8000
