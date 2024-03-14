@@ -17,7 +17,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN mkdir -p data
 
 # Download the dataset zip file from Kaggle
-RUN wget -O /tmp/dataset.zip "https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset/download?datasetVersionNumber=3"
+RUN curl -o /tmp/dataset.zip "https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset/download?datasetVersionNumber=3"
 
 # Extract the dataset zip file
 RUN unzip /tmp/dataset.zip -d /tmp/dataset
