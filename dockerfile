@@ -11,7 +11,7 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install any dependencies specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt  
+# RUN pip install --no-cache-dir -r requirements.txt  
 
 # Create the data directory
 RUN mkdir -p data
