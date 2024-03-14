@@ -23,19 +23,23 @@ RUN wget -o /tmp/archive.zip "https://www.kaggle.com/datasets/arashnic/book-reco
 RUN ls -l /tmp
 
 # Extract the dataset zip file using jar command
-RUN jar xvf /tmp/archive.zip -C /tmp/
+# RUN jar xvf /tmp/archive.zip -C /tmp/
 
 # List the extracted files for verification
-RUN ls -l /tmp
+# RUN ls -l /tmp
 
 # Copy the extracted files into the /app/data directory
-RUN cp /tmp/dataset/* data/
+# RUN cp /tmp/dataset/* data/
+
+RUN jar xvf /tmp/archive.zip -C /tmp/ && mv /tmp/* /app/data/ && rm -rf /tmp/*
 
 # List the copied files for verification
-RUN ls -l data/
+# RUN ls -l data/
 
 # Copy the rest of the application code into the container at /app
 COPY Book/ .
+
+RUN ls - l app/
 
 # Expose port 8000 to the outside world
 EXPOSE 8000
